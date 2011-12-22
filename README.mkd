@@ -14,7 +14,7 @@ tpl hello-world.mkd
 ## Bugs and Issues
 
 If you encounter any bugs or issues, feel free to open an issue at
-[github](//github.com/pvorb/node-pub/issues).
+[github](//github.com/pvorb/node-tpl/issues).
 
 ## License
 
