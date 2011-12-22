@@ -1,0 +1,21 @@
+{
+  "author": "Paul Vorbach <paul@vorb.de> (http://vorb.de/)",
+  "name": "tpl",
+  "description": "a general purpose template cli",
+  "tags": [ "tpl", "template", "cli" ],
+  "version": "0.0.0",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/pvorb/node-tpl.git"
+  },
+  "bugs": {
+    "url": "https://github.com/pvorb/node-tpl/issues"
+  },
+  "main": "./tpl.js",
+  "engines": {
+    "node": ">=0.6.0"
+  },
+  "dependencies": {},
+  "licenses": [ { "type": "MIT",
+      "url": "http://vorb.de/license/mit.html" } ]
+}

@@ -1,0 +1,22 @@
+# tpl
+a general purpose template cli
+
+## Installation
+
+`npm install tpl` or `npm install -g tpl`
+
+## Usage
+
+``` bash
+tpl hello-world.mkd
+```
+
+## Bugs and Issues
+
+If you encounter any bugs or issues, feel free to open an issue at
+[github](//github.com/pvorb/node-pub/issues).
+
+## License
+
+This package is licensed under the
+[MIT license](http://vorb.de/license/mit.html).
