@@ -8,7 +8,7 @@ a general purpose template cli
 ## Usage
 
 ``` bash
-tpl hello-world.mkd
+tpl hello-world.mkd > hello-world.html
 ```
 
 ## Bugs and Issues
