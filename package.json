@@ -12,10 +12,16 @@
     "url": "https://github.com/pvorb/node-tpl/issues"
   },
   "main": "./tpl.js",
+  "bin": "./bin/tpl",
   "engines": {
     "node": ">=0.6.0"
   },
-  "dependencies": {},
+  "dependencies": {
+    "append": ">=0.1.1",
+    "confdir": ">=0.0.2",
+    "ejs": ">=0.6.1",
+    "optimist": ">=0.3.0"
+  },
   "licenses": [ { "type": "MIT",
       "url": "http://vorb.de/license/mit.html" } ]
 }
