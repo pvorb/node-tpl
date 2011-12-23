@@ -1,0 +1,39 @@
+#!/usr/bin/env node
+
+var optimist = require('optimist')
+  .usage('Usage: tpl [-v|--version] [-h|--help] [file]')
+  .options('v', {
+    alias: 'version',
+    describe: 'Show the version of this script'
+  })
+  .options('h', {
+    alias: 'help',
+    describe: 'This message'
+  });
+var argv = optimist.argv;
+
+var tpl = require('tpl');
+// Show version
+if (argv.v) {
+  console.log(tpl.version);
+}
+// Show help
+else if (argv.h) {
+  console.log(optimist.help());
+}
+// Show unknown command
+else if (Object.keys(argv).length > 2) {
+  console.error('Unknown command');
+}
+// Show help
+else if (argv._.length == 0) {
+  console.log(optimist.help());
+}
+// One file at a time
+else if (argv._.length > 1) {
+  console.error('tpl can only translate one file at a time.');
+}
+// Translate file
+else {
+  console.log(argv);
+}
