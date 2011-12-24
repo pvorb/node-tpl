@@ -26,44 +26,43 @@ var defaultConf = {
 function apply(file, cb) {
   // look for configuration directory
   confdir(process.cwd(), 'tpl', function(err, dir) {
-    if (err) {
+    try {
+      // read configuration file
+      var json = fs.readFileSync(path.resolve(dir, 'conf.json'), 'utf8');
+      var conf = JSON.parse(json);
+      // set configuration
+      conf = append(defaultConf, conf);
+
+      var ext = path.extname(file);
+      var parser;
+      // determine parser
+      if (typeof conf.parsers[ext] != 'undefined')
+        parser = conf.parser[ext];
+      else
+        parser = conf.parsers.default;
+      // require parser
+      parser = require(path.resolve(dir, 'parsers', parser + '.js'));
+
+      // parse file
+      var doc = parser(file);
+
+      var tpl;
+      // determine template and engine
+      if (typeof doc.template != 'undefined')
+        tpl = conf.templates[doc.template]
+      else
+        tpl = conf.templates.default;
+
+      // resolve template file
+      tpl.file = path.resolve(dir, 'templates', tpl.file);
+      // require template engine
+      tpl.engine = require(path.resolve(dir, 'templates', tpl.engine + '.js'));
+
+      // render
+      cb(null, tpl.engine(tpl.file, doc));
+    } catch (err) {
       cb(err);
-      return;
     }
-
-    // read configuration file
-    var json = fs.readFileSync(path.resolve(dir, 'conf.json'), 'utf8');
-    var conf = JSON.parse(json);
-    // set configuration
-    conf = append(defaultConf, conf);
-
-    var ext = path.extname(file);
-    var parser;
-    // determine parser
-    if (typeof conf.parsers[ext] != 'undefined')
-      parser = conf.parser[ext];
-    else
-      parser = conf.parsers.default;
-    // require parser
-    parser = require(path.resolve(dir, 'parsers', parser + '.js'));
-
-    // parse file
-    var doc = parser(file);
-
-    var tpl;
-    // determine template and engine
-    if (typeof doc.template != 'undefined')
-      tpl = conf.templates[doc.template]
-    else
-      tpl = conf.templates.default;
-
-    // resolve template file
-    tpl.file = path.resolve(dir, 'templates', tpl.file);
-    // require template engine
-    tpl.engine = require(path.resolve(dir, 'templates', tpl.engine + '.js'));
-
-    // render
-    return cb(null, tpl.engine(tpl.file, doc));
   });
 }
 
