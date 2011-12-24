@@ -2,8 +2,12 @@
   "author": "Paul Vorbach <paul@vorb.de> (http://vorb.de/)",
   "name": "tpl",
   "description": "a general purpose template cli",
-  "tags": [ "tpl", "template", "cli" ],
-  "version": "0.0.0",
+  "tags": [
+    "tpl",
+    "template",
+    "cli"
+  ],
+  "version": "0.1.0",
   "repository": {
     "type": "git",
     "url": "git://github.com/pvorb/node-tpl.git"
@@ -12,7 +16,9 @@
     "url": "https://github.com/pvorb/node-tpl/issues"
   },
   "main": "./tpl.js",
-  "bin": "./bin/tpl",
+  "bin": {
+    "tpl": "./bin/tpl"
+  },
   "engines": {
     "node": ">=0.6.0"
   },
@@ -24,6 +30,11 @@
     "optimist": ">=0.3.0",
     "props": ">=0.1.1"
   },
-  "licenses": [ { "type": "MIT",
-      "url": "http://vorb.de/license/mit.html" } ]
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://vorb.de/license/mit.html"
+    }
+  ],
+  "devDependencies": {}
 }
