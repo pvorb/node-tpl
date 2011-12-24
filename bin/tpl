@@ -12,10 +12,9 @@ var optimist = require('optimist')
   });
 var argv = optimist.argv;
 
-var tpl = require('tpl');
 // Show version
 if (argv.v) {
-  console.log(tpl.version);
+  console.log(require('tpl').version);
 }
 // Show help
 else if (argv.h) {
@@ -35,5 +34,9 @@ else if (argv._.length > 1) {
 }
 // Translate file
 else {
-  console.log(argv);
+  var file = require('path').resolve(process.cwd(), argv._[0]);
+
+  require('tpl').apply(file, function(err, result) {
+    console.log(result);
+  });
 }

@@ -1,44 +1,72 @@
 // tpl - a general purpose template cli
 // (c) 2011 Paul Vorbach. Licensed under MIT.
 ;(function() {
-  var version = 'v0.0.0';
 
-  var fs = require('fs');
-  var path = require('path');
-  var confdir = require('confdir');
-  var append = require('append');
+module.exports.version = 'v0.0.0';
 
-  // default template engine
-  var ejs = require('ejs');
-  var tplEngine = ejs;
+var fs = require('fs');
+var path = require('path');
+var confdir = require('confdir');
+var append = require('append');
 
-  // default
-  var defaultConf = {
-    parsers: {
-      __default: 'markdown.js'
-    },
-    templates: {
-      __default: 'default.ejs'
-    },
-    extensions: {
-      __default: 'txt'
-    },
-  };
-
-  function apply(content, cb) {
-    // look for configuration directory
-    confdir(process.cwd(), 'tpl', function(err, dir) {
-      if (err) console.error(err);
-
-      var json = fs.readFileSync(path.resolve(dir, 'conf.json'), 'utf8');
-      var conf = JSON.parse(json);
-      conf = append(defaultConf, conf);
-
-    });
+// default configuration
+var defaultConf = {
+  parsers: {
+    default: 'props-markdown'
+  },
+  templates: {
+    default: {
+      file: 'default.ejs',
+      engine: 'ejs',
+      ext: '.txt'
+    }
   }
+};
 
-  return {
-    apply: apply,
-    version: version
-  };
+function apply(file, cb) {
+  // look for configuration directory
+  confdir(process.cwd(), 'tpl', function(err, dir) {
+    if (err) {
+      cb(err);
+      return;
+    }
+
+    // read configuration file
+    var json = fs.readFileSync(path.resolve(dir, 'conf.json'), 'utf8');
+    var conf = JSON.parse(json);
+    // set configuration
+    conf = append(defaultConf, conf);
+
+    var ext = path.extname(file);
+    var parser;
+    // determine parser
+    if (typeof conf.parsers[ext] != 'undefined')
+      parser = conf.parser[ext];
+    else
+      parser = conf.parsers.default;
+    // require parser
+    parser = require(path.resolve(dir, 'parsers', parser + '.js'));
+
+    // parse file
+    var doc = parser(file);
+
+    var tpl;
+    // determine template and engine
+    if (typeof doc.template != 'undefined')
+      tpl = conf.templates[doc.template]
+    else
+      tpl = conf.templates.default;
+
+    // resolve template file
+    tpl.file = path.resolve(dir, 'templates', tpl.file);
+    // require template engine
+    tpl.engine = require(path.resolve(dir, 'templates', tpl.engine + '.js'));
+
+    // render
+    return cb(null, tpl.engine(tpl.file, doc));
+  });
+}
+
+module.exports.apply = apply;
+
 }).call(this);
