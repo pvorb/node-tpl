@@ -37,24 +37,8 @@ tpl hello-world.mkd > hello-world.html
 
 ### Use custom configuration
 
-**tpl** allows you to use nearly any document parser with any templating engine
-you want.
-
-The default document parser is [props](//github.com/pvorb/node-props). The
-default template rendering engine is [ejs](//github.com/visionmedia/ejs).
-
-If you want to use another parser or template engine, you can do so by adding a
-`.tpl` directory in the root of you project.
-
-```
-.tpl/
-  conf.json
-  parsers/
-    parser.js     // one or more parser scripts
-  templates/
-    engine.js     // one or more template engines
-    template.ejs  // one or more temlates
-```
+For information on how to customize the behavior of **tpl**, look at the
+[wiki](//github.com/pvorb/node-tpl/wiki).
 
 ## Bugs and Issues
 
