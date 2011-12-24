@@ -20,7 +20,9 @@
     "append": ">=0.1.1",
     "confdir": ">=0.0.2",
     "ejs": ">=0.6.1",
-    "optimist": ">=0.3.0"
+    "marked": ">=0.1.4",
+    "optimist": ">=0.3.0",
+    "props": ">=0.1.1"
   },
   "licenses": [ { "type": "MIT",
       "url": "http://vorb.de/license/mit.html" } ]
