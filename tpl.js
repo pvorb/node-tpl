@@ -27,6 +27,9 @@ function apply(file, cb) {
   // look for configuration directory
   confdir(process.cwd(), 'tpl', function(err, dir) {
     try {
+      if (err)
+        dir = path.resolve(__dirname, '.tpl');
+
       // read configuration file
       var json = fs.readFileSync(path.resolve(dir, 'conf.json'), 'utf8');
       var conf = JSON.parse(json);
