@@ -1,7 +1,10 @@
 #!/usr/bin/env node
 
 var optimist = require('optimist')
-  .usage('Usage: tpl [-v|--version] [-h|--help] [file]')
+  .usage('Usage:\n'
+      + 'tpl [file]\n'
+      + 'tpl [-v|--version]\n'
+      + 'tpl [-h|--help]')
   .options('v', {
     alias: 'version',
     describe: 'Show the version of this script'
