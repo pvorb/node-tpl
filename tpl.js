@@ -23,7 +23,7 @@ var defaultConf = {
   }
 };
 
-function apply(file, cb) {
+function apply(file, opt, cb) {
   // look for configuration directory
   confdir(process.cwd(), 'tpl', function(err, dir) {
     try {
@@ -47,7 +47,8 @@ function apply(file, cb) {
       parser = require(path.resolve(dir, 'parsers', parser + '.js'));
 
       // parse file
-      var doc = parser(file);
+      var doc = append(opt, parser(file));
+      console.log(doc);
 
       var tpl;
       // determine template and engine

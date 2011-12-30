@@ -2,7 +2,7 @@
 
 var optimist = require('optimist')
   .usage('Usage:\n'
-      + 'tpl [file]\n'
+      + 'tpl [options] [file]\n'
       + 'tpl [-v|--version]\n'
       + 'tpl [-h|--help]')
   .options('v', {
@@ -23,10 +23,6 @@ if (argv.v) {
 else if (argv.h) {
   console.log(optimist.help());
 }
-// Show unknown command
-else if (Object.keys(argv).length > 2) {
-  console.error('Unknown command');
-}
 // Show help
 else if (argv._.length == 0) {
   console.log(optimist.help());
@@ -39,7 +35,10 @@ else if (argv._.length > 1) {
 else {
   var file = require('path').resolve(process.cwd(), argv._[0]);
 
-  require('tpl').apply(file, function(err, result) {
+  delete argv._;
+  delete argv['$0'];
+
+  require('../tpl.js').apply(file, argv, function(err, result) {
     console.log(result);
   });
 }
