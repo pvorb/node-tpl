@@ -1,26 +1,12 @@
 #!/usr/bin/env node
 
 var optimist = require('optimist')
-  .usage('Usage:\n'
-      + 'tpl [options] [file]\n'
-      + 'tpl [-v|--version]\n'
-      + 'tpl [-h|--help]')
-  .options('v', {
-    alias: 'version',
-    describe: 'Show the version of this script'
-  })
-  .options('h', {
-    alias: 'help',
-    describe: 'This message'
-  });
+  .usage('  tpl [options] [file]  Apply a template to a file\n'
+      +  '  tpl [-h|--help]       Show help');
 var argv = optimist.argv;
 
-// Show version
-if (argv.v) {
-  console.log(require('tpl').version);
-}
 // Show help
-else if (argv.h) {
+if (argv.h) {
   console.log(optimist.help());
 }
 // Show help

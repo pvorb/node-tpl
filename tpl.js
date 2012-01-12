@@ -2,8 +2,6 @@
 // (c) 2011 Paul Vorbach. Licensed under MIT.
 ;(function() {
 
-module.exports.version = 'v0.1.1';
-
 var fs = require('fs');
 var path = require('path');
 var confdir = require('confdir');
