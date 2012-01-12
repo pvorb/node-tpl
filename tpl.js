@@ -48,7 +48,6 @@ function apply(file, opt, cb) {
 
       // parse file
       var doc = append(opt, parser(file));
-      console.log(doc);
 
       var tpl;
       // determine template and engine
