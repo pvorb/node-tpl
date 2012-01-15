@@ -1,7 +1,11 @@
 #!/usr/bin/env node
 
+var fs = require('fs');
+var path = require('path');
+
 var optimist = require('optimist')
-  .usage('  tpl [options] [file]  Apply a template to a file\n'
+  .usage('  tpl init              Create a basic configuration directory\n'
+      +  '  tpl [options] [file]  Apply a template to a file\n'
       +  '  tpl [-h|--help]       Show help');
 var argv = optimist.argv;
 
@@ -16,6 +20,19 @@ else if (argv._.length == 0) {
 // One file at a time
 else if (argv._.length > 1) {
   console.error('tpl can only translate one file at a time.');
+}
+else if (argv._.length == 1 && argv._[0] == 'init') {
+  var confdir = path.resolve(process.cwd(), '.tpl');
+  try {
+    fs.mkdirSync(confdir);
+    fs.writeFileSync(path.resolve(confdir, 'conf.json'));
+    fs.mkdirSync(path.resolve(confdir, 'templates'));
+    fs.mkdirSync(path.resolve(confdir, 'parsers'));
+    console.log('Created the configuration directory \''+confdir+'\'.');
+  } catch (e) {
+    console.error('Could not create the configuration directory \''+confdir
+        +'\'.');
+  }
 }
 // Translate file
 else {
