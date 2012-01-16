@@ -18,7 +18,8 @@ var defaultConf = {
       engine: 'ejs',
       ext: '.txt'
     }
-  }
+  },
+  properties: {}
 };
 
 function apply(file, opt, cb) {
@@ -43,6 +44,9 @@ function apply(file, opt, cb) {
         parser = conf.parsers.default;
       // require parser
       parser = require(path.resolve(dir, 'parsers', parser + '.js'));
+
+      // overwrite global properties
+      opt = append(conf.properties, opt);
 
       // parse file
       var doc = append(opt, parser(file));
