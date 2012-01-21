@@ -1,13 +1,13 @@
 {
   "name": "tpl",
   "description": "a general purpose template cli",
-    "author": "Paul Vorbach <paul@vorb.de> (http://vorb.de/)",
+  "author": "Paul Vorbach <paul@vorb.de> (http://vorb.de/)",
   "tags": [
     "tpl",
     "template",
     "cli"
   ],
-  "version": "0.2.3",
+  "version": "0.3.0",
   "repository": {
     "type": "git",
     "url": "git://github.com/pvorb/node-tpl.git"
