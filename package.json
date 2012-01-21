@@ -1,7 +1,7 @@
 {
-  "author": "Paul Vorbach <paul@vorb.de> (http://vorb.de/)",
   "name": "tpl",
   "description": "a general purpose template cli",
+    "author": "Paul Vorbach <paul@vorb.de> (http://vorb.de/)",
   "tags": [
     "tpl",
     "template",
@@ -17,7 +17,7 @@
   },
   "main": "./tpl.js",
   "bin": {
-    "tpl": "./bin/tpl"
+    "tpl": "./bin/tpl.js"
   },
   "engines": {
     "node": ">=0.6.0"

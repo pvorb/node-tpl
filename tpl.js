@@ -24,7 +24,7 @@ var defaultConf = {
 
 function apply(file, opt, cb) {
   // look for configuration directory
-  confdir(process.cwd(), 'tpl', function(err, dir) {
+  confdir(process.cwd(), 'conf', function(err, dir) {
     try {
       if (err)
         dir = path.resolve(__dirname, '.tpl');

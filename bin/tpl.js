@@ -3,26 +3,21 @@
 var fs = require('fs');
 var path = require('path');
 
-var optimist = require('optimist')
-  .usage('  tpl init              Create a basic configuration directory\n'
-      +  '  tpl [options] [file]  Apply a template to a file\n'
-      +  '  tpl [-h|--help]       Show help');
+var optimist = require('optimist');
+var usage = 'Usage:\n'
+  + '  tpl init              Create a basic configuration directory\n'
+  + '  tpl [options] [file]  Apply a template to a file\n'
+  + '  tpl [-h|--help]       Show help';
 var argv = optimist.argv;
 
 // Show help
-if (argv.h) {
-  console.log(optimist.help());
-}
-// Show help
-else if (argv._.length == 0) {
-  console.log(optimist.help());
-}
+if (argv.h || argv._.length == 0)
+  return console.log(usage);
 // One file at a time
-else if (argv._.length > 1) {
-  console.error('tpl can only translate one file at a time.');
-}
-else if (argv._.length == 1 && argv._[0] == 'init') {
-  var confdir = path.resolve(process.cwd(), '.tpl');
+if (argv._.length > 1)
+  return console.error('tpl can only translate one file at a time.');
+if (argv._.length == 1 && argv._[0] == 'init') {
+  var confdir = path.resolve(process.cwd(), '.conf');
   try {
     fs.mkdirSync(confdir);
     fs.writeFileSync(path.resolve(confdir, 'conf.json'));
