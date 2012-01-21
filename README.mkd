@@ -17,10 +17,10 @@ tpl hello-world.mkd
 
 This will do several things.
 
-1.  Look for a `.tpl` directory in the current working directory, if none exists
+1.  Look for a `.conf` directory in the current working directory, if none exists
     look for one in the parent directory, in the parent's parent directory and
-    so on. If there's no `.tpl` directory all the way up to the root, use the
-    default `.tpl` in the installation directory.
+    so on. If there's no `.conf` directory all the way up to the root, use the
+    default `.conf` in the installation directory.
 2.  Use the configuration defined in `./tpl/conf.json`.
 3.  Look for a parser for the file extension (`.mkd`). If none was found,
     use the default parser.
